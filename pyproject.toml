@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "flc-core-data"
+version = "0.1.0"
+description = "FLC Data Team Notebook Repo"
+license = "Proprietary"
+authors = ["FabioCaffarello <fabio.caffarello@gmail.com>"]
+maintainers = ["FabioCaffarello <fabio.caffarello@gmail.com>"]
+readme = "README.md"
+repository = "https://github.com/FLC-Data/flc-core-data"
+
+  [[tool.poetry.packages]]
+  include = "flc_core_data"
+
+  [tool.poetry.dependencies]
+  python = "^3.8"
+
+  [tool.poetry.dev-dependencies]
+  flake8 = "3.9.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
