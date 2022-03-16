@@ -4,7 +4,7 @@ on:
     types: [assigned, opened, synchronize, reopened]
 
 jobs:
-  lint_job:
+  linter_job:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Python
@@ -32,4 +32,4 @@ jobs:
         run: poetry install --no-interaction
 
       - name: Linter
-        run: echo Teste
+        run: poetry run flake8
