@@ -40,4 +40,4 @@ jobs:
           echo ::set-output name=jira-issue::$output
 
       - name: echo_task
-        run: echo ${{ steps.Jira.output.jira-issue }}
+        run: echo "${{ steps.Jira.output.jira-issue }}"
