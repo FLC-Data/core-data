@@ -36,9 +36,9 @@ jobs:
 
       - name: Jira Issues Description
         id: jira
-        run: echo "::set-output name=issue::$(poetry run jira-script 10004 ${{ secrets.FLC_JIRA_TOKEN }})"
+        run: |
+          export issue=$(poetry run jira-script 10004 ${{ secrets.FLC_JIRA_TOKEN }})
+          echo "::set-env name=issue::$issue"
 
       - name: echo_task
-        env:
-          issue: ${{ steps.jira.output.issue }}
         run: echo $issue
