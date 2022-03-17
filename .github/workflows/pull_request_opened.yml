@@ -40,4 +40,4 @@ jobs:
 
       - name: echo_task
         id: echo_jira
-        run: echo "${{ steps.jira.output.issue }}"
+        run: echo "${{ steps.jira.outputs.issue }}"
