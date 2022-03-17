@@ -35,4 +35,9 @@ jobs:
         run: poetry run flake8
 
       - name: Jira
-        run: echo $(poetry run jira-script 10004 ${{ secrets.FLC_JIRA_TOKEN }})
+        id: jira
+        run: echo "::set-output name=issue::$(poetry run jira-script 10004 ${{ secrets.FLC_JIRA_TOKEN }})"
+
+      - name: echo_task
+        id: echo_jira
+        run: echo "${{ steps.jira.output.issue }}"
