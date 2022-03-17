@@ -27,7 +27,7 @@ def get_task_description(task_id, api_token):
     )
 
     r_json = json.loads(response.text)
-
+    print(r_json['fields']['description'])
     return r_json['fields']['description']
 
 
