@@ -34,10 +34,9 @@ jobs:
       - name: Linter
         run: poetry run flake8
 
-      - name: Jira
-        run: |
-          output=$(poetry run jira-script 10004 ${{ secrets.FLC_JIRA_TOKEN }})
-          echo ::set-output name=jira-issue::$output
+      - name: jira
+        id: jira-issues
+        run: echo "::set-output name=issue::$(poetry run jira-script 10004 ${{ secrets.FLC_JIRA_TOKEN }})"
 
       - name: echo_task
-        run: echo "${{ steps.Jira.output.jira-issue }}"
+        run: echo "${{ steps.jira-issues.output.issue }}"
