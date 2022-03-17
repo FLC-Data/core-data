@@ -41,4 +41,4 @@ jobs:
       - name: echo_task
         env:
           issue: ${{ steps.jira.output.issue }}
-        run: echo ${issue}
+        run: echo $issue
