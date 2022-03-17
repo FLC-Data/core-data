@@ -33,3 +33,6 @@ jobs:
 
       - name: Linter
         run: poetry run flake8
+
+      - name: tasks
+        run: poetry run jira-script Jiu token
