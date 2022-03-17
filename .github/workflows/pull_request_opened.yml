@@ -38,4 +38,4 @@ jobs:
         run: poetry run jira-script 10004 ${{ secrets.FLC_JIRA_TOKEN }}
 
       - name: echo_task
-        run: echo ${{ steps.tasks.outputs.* }}
+        run: echo ${{ steps.tasks.output }}
