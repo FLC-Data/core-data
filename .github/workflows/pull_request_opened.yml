@@ -41,3 +41,11 @@ jobs:
       - name: echo_task
         id: echo_jira
         run: echo "${{ steps.jira.outputs.issue }}"
+
+      - name: Echo Branch
+        id: echo_branch
+        run: $({GITHUB_REF#refs/heads/})"
+
+      - name: Current Branch
+        id: current_branch
+        run: echo "::set-output name=branch::$({GITHUB_REF#refs/heads/})"
