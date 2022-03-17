@@ -35,4 +35,4 @@ def cli(args=None):
     """Process command line arguments."""
     if not args:
         args = sys.argv[1:]
-    return print(get_task_description(*args))
+    return get_task_description(*args)
