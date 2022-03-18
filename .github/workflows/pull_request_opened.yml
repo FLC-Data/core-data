@@ -42,10 +42,11 @@ jobs:
         id: echo_jira
         run: echo "${{ steps.jira.outputs.issue }}"
 
-      - name: Echo Branch
+      - name: Get Branch
       - uses: bvkimball/branch-vars@1.0.1
 
-      - run: echo ${CURRENT_BRANCH}
+      - name: Echo Branch
+        run: echo ${CURRENT_BRANCH}
 
       # - name: Git Current Branch
       #   id: current_branch
