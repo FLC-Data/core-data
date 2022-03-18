@@ -46,9 +46,10 @@ jobs:
         id: echo_branch
         run: echo "${{ github.ref_name }}"
 
-      - name: Current Branch
-        id: current_branch
-        run: echo "::set-output name=branch::${{ github.ref_name }}"
-
       - name: Git Current Branch
-        run: git branch --show-current
+        id: current_branch
+        run: echo "::set-output name=branch::${{ git branch --show-current }}"
+
+      - name: echo_branch
+        id: echo_jira
+        run: echo "${{ steps.current_branch.outputs.branch }}"
