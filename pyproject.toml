@@ -16,11 +16,9 @@ repository = "https://github.com/FLC-Data/flc-core-data"
   pre-commit = "^2.17.0"
   requests = "^2.27.1"
 
-[tool.poetry.group.dev.dependencies]
-pyment = "^0.3.3"
-
   [tool.poetry.dev-dependencies]
   flake8 = "3.9.2"
+  pyment = "^0.3.3"
 
   [tool.poetry.scripts]
   jira-issue-script = "flc_core_data.jira.issue_description:cli"
