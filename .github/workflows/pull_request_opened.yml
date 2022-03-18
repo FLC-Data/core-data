@@ -43,13 +43,14 @@ jobs:
         run: echo "${{ steps.jira.outputs.issue }}"
 
       - name: Echo Branch
-        id: echo_branch
-        run: echo "${{ github.ref_name }}"
+      - uses: bvkimball/branch-vars@1.0.1
 
-      - name: Git Current Branch
-        id: current_branch
-        run: echo "::set-output name=branch::${{ git branch --show-current }}"
+      - run: echo ${CURRENT_BRANCH}
 
-      - name: echo_branch
-        id: echo_jira
-        run: echo "${{ steps.current_branch.outputs.branch }}"
+      # - name: Git Current Branch
+      #   id: current_branch
+      #   run: echo "::set-output name=branch::${{ git branch --show-current }}"
+
+      # - name: echo_branch
+      #   id: echo_jira
+      #   run: echo "${{ steps.current_branch.outputs.branch }}"
