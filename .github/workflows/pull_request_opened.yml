@@ -44,8 +44,8 @@ jobs:
 
       - name: Echo Branch
         id: echo_branch
-        run: echo "${{ github.ref }}"
+        run: echo "${{ github.ref_name }}"
 
       - name: Current Branch
         id: current_branch
-        run: echo "::set-output name=branch::${{ github.ref }}"
+        run: echo "::set-output name=branch::${{ github.ref_name }}"
