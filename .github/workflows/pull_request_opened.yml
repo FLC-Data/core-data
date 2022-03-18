@@ -36,7 +36,7 @@ jobs:
 
       - name: Jira
         id: jira
-        run: echo "::set-output name=issue::$(poetry run jira-script 10004 ${{ secrets.FLC_JIRA_TOKEN }})"
+        run: echo "::set-output name=issue::$(poetry run jira-issue-script 10004 ${{ secrets.FLC_JIRA_TOKEN }})"
 
       - name: echo_task
         id: echo_jira
@@ -49,3 +49,6 @@ jobs:
       - name: Current Branch
         id: current_branch
         run: echo "::set-output name=branch::${{ github.ref_name }}"
+
+      - name: Git Current Branch
+        run: git branch --show-current
