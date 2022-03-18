@@ -43,7 +43,7 @@ jobs:
         run: echo "${{ steps.jira.outputs.issue }}"
 
       - name: Get Branch
-      - uses: bvkimball/branch-vars@1.0.1
+        uses: bvkimball/branch-vars@1.0.1
 
       - name: Echo Branch
         run: echo ${CURRENT_BRANCH}
