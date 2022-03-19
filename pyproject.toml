@@ -14,9 +14,14 @@ repository = "https://github.com/FLC-Data/flc-core-data"
   [tool.poetry.dependencies]
   python = "^3.8"
   pre-commit = "^2.17.0"
+  requests = "^2.27.1"
 
   [tool.poetry.dev-dependencies]
   flake8 = "3.9.2"
+  pyment = "^0.3.3"
+
+  [tool.poetry.scripts]
+  jira-issue-script = "flc_core_data.jira.issue_description:cli"
 
 [build-system]
 requires = ["poetry-core"]
