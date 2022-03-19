@@ -70,18 +70,18 @@ jobs:
         id: branch
         run:  echo "::set-output name=branch_issue::$(echo ${CURRENT_BRANCH} | grep -o -E '[A-Z0-9\-]+')"
 
-      - name: Echo Test
+      - name: Echo Wrangling Branch Name
         run: echo ${{ steps.branch.outputs.branch_issue }}
 
-      # - name: Get Jira Issue Description
-      #   id: jira
-      #   run: echo "::set-output name=issue::$(poetry run jira-issue-script ${{ steps.branch.outputs.branch_issue }} ${{ secrets.FLC_JIRA_TOKEN }} ${{ secrets.FLC_JIRA_EMAIL }})"
+      - name: Get Jira Issue Description
+        id: jira
+        run: echo "::set-output name=issue::$(poetry run jira-issue-script ${{ steps.branch.outputs.branch_issue }} ${{ secrets.FLC_JIRA_TOKEN }} ${{ secrets.FLC_JIRA_EMAIL }})"
 
-      # - name: Echo Jira Issue Description
-      #   run: echo "${{ steps.jira.outputs.issue }}"
+      - name: Echo Jira Issue Description
+        run: echo "${{ steps.jira.outputs.issue }}"
 
-      # - name: Update Pull Request Description
-      #   uses: riskledger/update-pr-description@v2
-      #   with:
-      #     body: "${{ steps.jira.outputs.issue }}"
-      #     token: ${{ secrets.FLC_GITHUB_TOKEN }}
+      - name: Update Pull Request Description
+        uses: riskledger/update-pr-description@v2
+        with:
+          body: "${{ steps.jira.outputs.issue }}"
+          token: ${{ secrets.FLC_GITHUB_TOKEN }}
