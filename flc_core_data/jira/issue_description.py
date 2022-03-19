@@ -47,10 +47,3 @@ def cli(args=None):
     if not args:
         args = sys.argv[1:]
     return get_task_description(*args)
-
-
-if __name__ == '__main__':
-    issue_id = '10004'
-    user_id = 'fabio.caffarello@gmail.com'
-    api_token = 'DbaJ8UHY0WROaDSqAWLq973D'
-    get_task_description(issue_id, api_token, user_id)

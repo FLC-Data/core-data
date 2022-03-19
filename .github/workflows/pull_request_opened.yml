@@ -68,17 +68,20 @@ jobs:
 
       - name: Wrangling Branch Name
         id: branch
-        run:  echo "::set-output name=branch-issue::$(${CURRENT_BRANCH} | grep -o -E '[A-Z0-9\-]+')"
+        run:  echo "::set-output name=branch_issue::$(${CURRENT_BRANCH} | grep -o -E '[A-Z0-9\-]+')"
 
-      - name: Get Jira Issue Description
-        id: jira
-        run: echo "::set-output name=issue::$(poetry run jira-issue-script ${{ steps.branch.outputs.branch-issue }} ${{ secrets.FLC_JIRA_TOKEN }} ${{ secrets.FLC_JIRA_EMAIL }})"
+      - name: Echo Test
+        run: echo ${{ steps.branch.outputs.branch_issue }}
 
-      - name: Echo Jira Issue Description
-        run: echo "${{ steps.jira.outputs.issue }}"
+      # - name: Get Jira Issue Description
+      #   id: jira
+      #   run: echo "::set-output name=issue::$(poetry run jira-issue-script ${{ steps.branch.outputs.branch_issue }} ${{ secrets.FLC_JIRA_TOKEN }} ${{ secrets.FLC_JIRA_EMAIL }})"
 
-      - name: Update Pull Request Description
-        uses: riskledger/update-pr-description@v2
-        with:
-          body: "${{ steps.jira.outputs.issue }}"
-          token: ${{ secrets.FLC_GITHUB_TOKEN }}
+      # - name: Echo Jira Issue Description
+      #   run: echo "${{ steps.jira.outputs.issue }}"
+
+      # - name: Update Pull Request Description
+      #   uses: riskledger/update-pr-description@v2
+      #   with:
+      #     body: "${{ steps.jira.outputs.issue }}"
+      #     token: ${{ secrets.FLC_GITHUB_TOKEN }}
