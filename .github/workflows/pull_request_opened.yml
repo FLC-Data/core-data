@@ -68,7 +68,7 @@ jobs:
 
       - name: Wrangling Branch Name
         id: branch
-        run:  echo "::set-output name=branch_issue::$(${CURRENT_BRANCH} | grep -o -E '[A-Z0-9\-]+')"
+        run:  echo "::set-output name=branch_issue::$(echo ${CURRENT_BRANCH} | grep -o -E '[A-Z0-9\-]+')"
 
       - name: Echo Test
         run: echo ${{ steps.branch.outputs.branch_issue }}
