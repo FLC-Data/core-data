@@ -4,7 +4,8 @@ on:
     types: [assigned, opened, synchronize, reopened]
 
 jobs:
-  linter_job:
+  # Run Linter
+  linter:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Python
@@ -34,24 +35,43 @@ jobs:
       - name: Linter
         run: poetry run flake8
 
-      - name: Jira
-        id: jira
-        run: echo "::set-output name=issue::$(poetry run jira-issue-script 10004 ${{ secrets.FLC_JIRA_TOKEN }})"
+  # Update Pull Request Description with the Jira Issue Description.
+  jira_issue_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8.5
 
-      - name: echo_task
-        id: echo_jira
-        run: echo "${{ steps.jira.outputs.issue }}"
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-      - name: Get Branch
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-in-project: true
+
+      - name: Load Cached Venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v2
+        with:
+          path: .venv
+          key: venv-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install Dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction
+
+      - name: Get Current Branch
         uses: bvkimball/branch-vars@1.0.1
 
-      - name: Echo Branch
-        run: echo ${CURRENT_BRANCH}
+      - name: Get Jira Issue Description
+        id: jira
+        run: echo "::set-output name=issue::$(poetry run jira-issue-script ${ CURRENT_BRANCH } ${{ secrets.FLC_JIRA_TOKEN }} ${{ secrets.FLC_JIRA_EMAIL }})"
 
-      # - name: Git Current Branch
-      #   id: current_branch
-      #   run: echo "::set-output name=branch::${{ git branch --show-current }}"
-
-      # - name: echo_branch
-      #   id: echo_jira
-      #   run: echo "${{ steps.current_branch.outputs.branch }}"
+      - name: Update Pull Request Description
+        uses: riskledger/update-pr-description@v2
+        with:
+          body: "${{ steps.jira.outputs.issue }}"
+          token: ${{ secrets.FLC_GITHUB_TOKEN }}
