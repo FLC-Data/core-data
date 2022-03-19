@@ -1,4 +1,7 @@
 ### Generate with: https://www.toptal.com/developers/gitignore
+
+secrets/
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
