@@ -70,6 +70,9 @@ jobs:
         id: jira
         run: echo "::set-output name=issue::$(poetry run jira-issue-script ${ CURRENT_BRANCH } ${{ secrets.FLC_JIRA_TOKEN }} ${{ secrets.FLC_JIRA_EMAIL }})"
 
+      - name: Echo Jira Issue Description
+        run: echo "${{ steps.jira.outputs.issue }}"
+
       - name: Update Pull Request Description
         uses: riskledger/update-pr-description@v2
         with:
