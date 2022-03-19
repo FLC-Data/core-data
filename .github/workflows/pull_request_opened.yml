@@ -66,9 +66,13 @@ jobs:
       - name: Get Current Branch
         uses: bvkimball/branch-vars@1.0.1
 
+      - name: Wrangling Branch Name
+        id: branch
+        run:  echo "::set-output name=branch-issue::$(${CURRENT_BRANCH} | grep -o -E '[A-Z0-9\-]+')"
+
       - name: Get Jira Issue Description
         id: jira
-        run: echo "::set-output name=issue::$(poetry run jira-issue-script ${CURRENT_BRANCH} ${{ secrets.FLC_JIRA_TOKEN }} ${{ secrets.FLC_JIRA_EMAIL }})"
+        run: echo "::set-output name=issue::$(poetry run jira-issue-script ${{ steps.branch.outputs.branch-issue }} ${{ secrets.FLC_JIRA_TOKEN }} ${{ secrets.FLC_JIRA_EMAIL }})"
 
       - name: Echo Jira Issue Description
         run: echo "${{ steps.jira.outputs.issue }}"
